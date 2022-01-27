@@ -1,11 +1,11 @@
 export function multiply(a, b){
-    //GREEN
+    //GREEN 2
     if(isNaN(a)){
         return a + " is not a number" 
     }else if (isNaN(b)){
         return b + " is not a number"
     }else{
-        //GREEN
+        //GREEN 1
         return a * b
     }
 }
