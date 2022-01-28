@@ -5,70 +5,47 @@ let tens = ['Dix', 'Vingt', 'Trente', 'Quarante', 'Cinquante', 'Soixante', 'Quat
 let hundred = ['Cent']
 
 
-
-
-
 export function convert(n) {
 
     let number_stringify = n.toString()
     let numberSize = number_stringify.length
 
-    if(numberSize == 1){
-        return  getUnit(number_stringify[0])
-    }
-    if(numberSize == 2){
-        if(number_stringify[1] == "0"){
-            if(number_stringify[0] == "7" || number_stringify[0] == "9"){
-                return getTens(number_stringify[0]) + " " + getTens(1);
-            }else{
-                return getTens(number_stringify[0])
-            }
-        }else if(number_stringify[0] == "1" && (number_stringify[1] != "7" || number_stringify[1] != "8" || number_stringify[1] != "9")){
-            return getSpecial(number_stringify[1])
-        }else if(number_stringify[0] == "7" || number_stringify[0] == "9"){
-            return getTens(number_stringify[0]) + " " + getSpecial(number_stringify[1])
-        }else{
-            return getTens(number_stringify[0]) + " " + getUnit(number_stringify[1])
+
+    if(isNaN(n)){
+        return n + " is not a number" 
+    }else {
+        if(numberSize == 1){
+            return  getUnit(number_stringify[0])
         }
-    }if(numberSize == 3){
-
-        if(number_stringify[0] == "1" && number_stringify[1] == "0" && number_stringify[2] == "0"){
-            return getHundred()
-        }else if(number_stringify[0] == "1"){
-            if(number_stringify[2] == "0"){
-                if(number_stringify[1] == "7" || number_stringify[1] == "9"){
-                    return getHundred() + " " + getTens(number_stringify[1]) + " " + getTens(1);
-                }else{
-                    return getHundred() + " " + getTens(number_stringify[1])
-                }
-            }else if(number_stringify[1] == "1" && (number_stringify[2] != "7" || number_stringify[2] != "8" || number_stringify[2] != "9")){
-                return getHundred() + " " + getSpecial(number_stringify[2])
-            }else if(number_stringify[1] == "7" || number_stringify[1] == "9"){
-                return getHundred() + " " + getTens(number_stringify[1]) + " " + getSpecial(number_stringify[2])
-            }else{
-                return getHundred() + " " + getTens(number_stringify[1]) + " " + getUnit(number_stringify[2])
+        if(numberSize == 2){
+            return setTens(number_stringify[0], number_stringify[1])
+        }if(numberSize == 3){
+            if(number_stringify[0] == "1" && number_stringify[1] == "0" && number_stringify[2] == "0"){
+                return getHundred()
+            }else if(number_stringify[0] == "1"){
+                return getHundred() + " " + setTens(number_stringify[1], number_stringify[2])
+            }else {
+                return getUnit(number_stringify[0]) + " " + getHundred() + " " + setTens(number_stringify[1], number_stringify[2])
             }
-        }
-
-        // JAI GERER LES 100 ene a voir après !!
-
-
-
-        else if(number_stringify[2] == "0"){
-            if(number_stringify[1] == "7" || number_stringify[1] == "9"){
-                return getUnit(number_stringify[0]) + " " + getHundred() + " " + getTens(number_stringify[1]) + " " + getTens(1);
-            }else{
-                return getTens(number_stringify[0])
-            }
-        }else if(number_stringify[0] == "1" && (number_stringify[1] != "7" || number_stringify[1] != "8" || number_stringify[1] != "9")){
-            return getSpecial(number_stringify[1])
-        }else if(number_stringify[0] == "7" || number_stringify[0] == "9"){
-            return getTens(number_stringify[0]) + " " + getSpecial(number_stringify[1])
-        }else{
-            return getTens(number_stringify[0]) + " " + getUnit(number_stringify[1])
+    
         }
     }
+}
 
+function setTens(tens, units){
+    if(units == "0"){
+        if(tens == "7" || tens == "9"){
+            return getTens(tens) + " " + getTens("1");
+        }else{
+            return getTens(tens)
+        }
+    }else if(tens == "1"){
+        return getSpecial(units)
+    }else if(tens == "7" || tens == "9"){
+        return getTens(tens) + " " + getSpecial(units)
+    }else{
+        return getTens(tens) + " " + getUnit(units)
+    }
 }
 
 function getUnit(n) {
@@ -91,8 +68,6 @@ function getUnit(n) {
             return unit[7];
         case "9":
             return unit[8];
-        default:
-            return n + " is not a number"
     }
 }
 
@@ -116,8 +91,6 @@ function getTens(n) {
             return tens[6];
         case "9":
             return tens[6];
-        default:
-            return n + " is not a number"
     }
 }
 
@@ -141,8 +114,6 @@ function getSpecial(n) {
             return special[7];
         case "9":
             return special[8];
-        default:
-            return n + " is not a number"
     }
 }
 
