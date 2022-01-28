@@ -19,7 +19,8 @@ export function convert(n) {
         }
         if(numberSize == 2){
             return setTens(number_stringify[0], number_stringify[1])
-        }if(numberSize == 3){
+        }
+        if(numberSize == 3){
             if(number_stringify[0] == "1" && number_stringify[1] == "0" && number_stringify[2] == "0"){
                 return getHundred()
             }else if(number_stringify[0] == "1"){
@@ -32,19 +33,19 @@ export function convert(n) {
     }
 }
 
-function setTens(tens, units){
+function setTens(ten, units){
     if(units == "0"){
-        if(tens == "7" || tens == "9"){
-            return getTens(tens) + " " + getTens("1");
+        if(ten == "7" || ten == "9"){
+            return getTens(ten) + " " + getTens("1");
         }else{
-            return getTens(tens)
+            return getTens(ten)
         }
-    }else if(tens == "1"){
+    }else if(ten == "1"){
         return getSpecial(units)
-    }else if(tens == "7" || tens == "9"){
-        return getTens(tens) + " " + getSpecial(units)
+    }else if(ten == "7" || ten == "9"){
+        return getTens(ten) + " " + getSpecial(units)
     }else{
-        return getTens(tens) + " " + getUnit(units)
+        return getTens(ten) + " " + getUnit(units)
     }
 }
 
