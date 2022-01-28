@@ -17,10 +17,10 @@ export function convert(n) {
         if(numberSize == 1){
             return  getUnit(number_stringify[0])
         }
-        if(numberSize == 2){
+        else if(numberSize == 2){
             return setTens(number_stringify[0], number_stringify[1])
         }
-        if(numberSize == 3){
+        else if(numberSize == 3){
             if(number_stringify[0] == "1" && number_stringify[1] == "0" && number_stringify[2] == "0"){
                 return getHundred()
             }else if(number_stringify[0] == "1"){
